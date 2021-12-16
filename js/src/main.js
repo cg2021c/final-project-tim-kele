@@ -43,6 +43,8 @@ var isCollide;
 var sky;
 var skySpeed;
 var frontMenu = true;
+var baseCatAudio = new Audio('public/audio/base.mp3');
+var angryCatAudio = new Audio('public/audio/angry.mp3');
 
 function blowUpTree(vertices, sides, currentTier, scalarMultiplier, odd) {
     var vertexIndex;
@@ -149,6 +151,7 @@ function createTreesPool() {
 }
 
 function handleKeyDown(keyEvent) {
+    baseCatAudio.play();
     if (jumping) return;
     var validMove = true;
     if (keyEvent.keyCode === 37) {
@@ -478,6 +481,7 @@ function onWindowResize() {
 }
 
 function gameOver() {
+    angryCatAudio.play();
     if(alert(`GAME OVER! King Robert hit a tree, Your Score is ${score}. \nClick OK to play again!`)){}
     else window.location.reload(); 
     cancelAnimationFrame( globalRenderID );
