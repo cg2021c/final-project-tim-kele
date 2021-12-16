@@ -6,6 +6,8 @@
         <meta name="author" content="TimKele" />
         <meta name="description" content="Cat Run" />
 
+        <script src="https://cdn.tailwindcss.com"></script>
+
         <script type="text/javascript" src="js/lib/three.min.js"></script>
         <script type="text/javascript" src="js/lib/stats.min.js"></script>
         <script type="text/javascript" src="js/lib/orbitcontrol.js"></script>
@@ -15,6 +17,24 @@
     </head>
 
     <body>
-        <div id="container"></div>
+        <div id="front-menu" class="h-screen w-screen flex justify-center items-center" style="position:fixed; background-color:black; opacity:0.75; z-index:99;">
+            <div class="py-8 px-16 bg-white rounded shadow-md text-center">
+                <img style="display:inline;" src="public/images/cats.webp" height="64" width="64" alt="cat logo"></img>
+                <p class="text-2xl font-bold">Cat Run</p>
+                <p class="text-sm mb-8">Miaw miaww?</p>
+                <button onClick="hideFrontMenu();" class="bg-green-600 text-white py-2 w-full rounded hover:bg-green-900">Miaw</button>
+            </div>
+        </div>
+        <div id="container">
+
+        </div>
     </body>
 </html>
+<script>
+    function hideFrontMenu() {
+        var elem = document.querySelector('#front-menu');
+        elem.parentNode.removeChild(elem);
+        frontMenu = false;
+        requestAnimationFrame(update);
+    }
+</script>

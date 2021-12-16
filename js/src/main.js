@@ -40,6 +40,7 @@ var stats;
 var scoreText;
 var score;
 var isCollide;
+var frontMenu = true;
 
 function blowUpTree(vertices, sides, currentTier, scalarMultiplier, odd) {
     var vertexIndex;
@@ -433,7 +434,8 @@ function update() {
     doTreeLogic();
     doExplosionLogic();
     render();
-    requestAnimationFrame(update);
+    if(!frontMenu)
+        requestAnimationFrame(update);
 }
 
 function onWindowResize() {
