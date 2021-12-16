@@ -224,8 +224,12 @@ function addWorld() {
     var sides = 40;
     var tiers = 40;
     var sphereGeometry = new THREE.SphereGeometry(worldRadius, sides, tiers);
+    const textureWorld = new THREE.TextureLoader().load(
+        '../../public/images/grass.jpg'
+    );
     var sphereMaterial = new THREE.MeshStandardMaterial({
-        color: 0x93e46f,
+        reflectivity: 0.5,
+        map: textureWorld,
     });
 
     var vertexIndex;
