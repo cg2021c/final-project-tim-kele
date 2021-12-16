@@ -366,9 +366,10 @@ function doTreeLogic() {
         } else {
             /* collision check */
             if (treePos.distanceTo(character.position) <= 0.6) {
-                console.log('hit');
+                console.log('hit');             
                 isCollide = true;
                 explode();
+                gameOver();
             }
         }
     });
@@ -422,7 +423,7 @@ function update() {
         addPathTree();
         if (!isCollide) {
             score += 2 * treeReleaseInterval;
-            scoreText.innerHTML = score.toString();
+            scoreText.innerHTML = `Score: ${score.toString()}`;
         }
     }
     doTreeLogic();
@@ -441,9 +442,9 @@ function onWindowResize() {
 }
 
 function gameOver() {
-    /* TODO: gameover logic */
-    //cancelAnimationFrame( globalRenderID );
-    //window.clearInterval( powerupSpawnIntervalID );
+    if(alert(`GAME OVER! King Robert hit a tree, Your Score is ${score}. \nClick OK to play again!`)){}
+    else window.location.reload(); 
+    cancelAnimationFrame( globalRenderID );
 }
 
 function createScene() {
@@ -473,7 +474,7 @@ function createScene() {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setSize(sceneWidth, sceneHeight);
-    dom = document.getElementById('TutContainer');
+    dom = document.getElementById('container');
     dom.appendChild(renderer.domElement);
     stats = new Stats();
     dom.appendChild(stats.dom);
