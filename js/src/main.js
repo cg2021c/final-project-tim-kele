@@ -40,6 +40,8 @@ var stats;
 var scoreText;
 var score;
 var isCollide;
+var sky;
+var skySpeed;
 var frontMenu = true;
 
 function blowUpTree(vertices, sides, currentTier, scalarMultiplier, odd) {
@@ -304,6 +306,29 @@ function addCharacter() {
     character.position.x = currentLane;
 }
 
+function addSkyCustom() {
+    /* TODO: change character here */
+    var sphereGeometry = new THREE.PlaneGeometry(60, 60);
+    const texture = new THREE.TextureLoader().load(
+        '../../public/images/sky.png'
+    );
+    texture.repeat.set( 1,1 );
+
+    var sphereMaterial = new THREE.MeshBasicMaterial({
+        map: texture,
+    });
+
+    // sphereGeometry.rotateY(Math.PI / 2);
+
+    sky = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    // sky.receiveShadow = true;
+    sky.position.y = -4;
+    sky.position.z = -15;
+    sky.position.x = 0;
+    skySpeed = -0.005;
+    scene.add(sky);
+}
+
 function addLight() {
     var hemisphereLight = new THREE.HemisphereLight(0xfffafa, 0x000000, 0.9);
     scene.add(hemisphereLight);
@@ -431,6 +456,11 @@ function update() {
             scoreText.innerHTML = `Score: ${score.toString()}`;
         }
     }
+    
+    if(sky.position.y < -25.375 || sky.position.y > -3.9) {
+        skySpeed = -skySpeed;
+    }
+    sky.position.y += skySpeed;
     doTreeLogic();
     doExplosionLogic();
     render();
@@ -466,7 +496,7 @@ function createScene() {
     sceneWidth = window.innerWidth;
     sceneHeight = window.innerHeight;
     scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0xf0fff0, 0.14);
+    // scene.fog = new THREE.FogExp2(0xf0fff0, 0.0);
 
     camera = new THREE.PerspectiveCamera(
         60,
@@ -486,6 +516,7 @@ function createScene() {
     dom.appendChild(stats.dom);
     createTreesPool();
     addWorld();
+    addSkyCustom();
     addCharacter();
     addLight();
     addExplosion();
