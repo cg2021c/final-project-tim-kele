@@ -231,7 +231,7 @@ function addWorld() {
     var tiers = 40;
     var sphereGeometry = new THREE.SphereGeometry(worldRadius, sides, tiers);
     const textureWorld = new THREE.TextureLoader().load(
-        '../../public/images/grass.jpg'
+        'public/images/grass.jpg'
     );
     var sphereMaterial = new THREE.MeshStandardMaterial({
         reflectivity: 0.5,
@@ -286,7 +286,7 @@ function addCharacter() {
     /* TODO: change character here */
     var sphereGeometry = new THREE.DodecahedronGeometry(characterRadius, 1);
     const texture = new THREE.TextureLoader().load(
-        '../../public/images/cats.webp'
+        'public/images/cats.webp'
     );
 
     var sphereMaterial = new THREE.MeshPhysicalMaterial({
@@ -313,7 +313,7 @@ function addSkyCustom() {
     /* TODO: change character here */
     var sphereGeometry = new THREE.PlaneGeometry(60, 60);
     const texture = new THREE.TextureLoader().load(
-        '../../public/images/sky.png'
+        'public/images/sky.png'
     );
     texture.repeat.set( 1,1 );
 
